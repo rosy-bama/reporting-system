@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @default(autoincrement()) @id
+  firstname String
+  lastname String
+  email String
+  phone Int
+  dob DateTime
+  address String
+
+  created_on DateTime @default(now())
+  updated_on DateTime @updatedAt
+  deleted_on DateTime?
+
+
+}
+
+enum UserTypeEnum {
+  GROUP_PASTOR
+  PASTOR
+  CELL_LEADER
+}
+
+model UserType {
+  id Int @default(autoincrement()) @id
+  usertype UserTypeEnum @default(CELL_LEADER)
+}
+
+model Report {
+  id Int @default(autoincrement()) @id
+  attendance Int
+  offering Int
+  first_timers Int
+  young_convert Int
+  number_saved Int
+
+  created_on DateTime @default(now())
+  updated_on DateTime @updatedAt
+  deleted_on DateTime?
+
+}
+
+model ReportDetails{
+  id Int @default(autoincrement()) @id
+  attendance Int
+  offering Int
+  first_timers Int
+  young_convert Int
+  number_saved Int
+  tithe Int
+  partnership Int?
+  details Json?
+
+  created_on DateTime @default(now())
+  updated_on DateTime @updatedAt
+  deleted_on DateTime?
+}
+
+enum ReportTypeEnum {
+  CELL_REPORT
+  SERVICE_REPORT
+}
+
+model ReportType{
+  id Int @default(autoincrement()) @id
+  description ReportTypeEnum @default(CELL_REPORT)
+}
+
+model ReportHistory {
+  id Int @default(autoincrement()) @id
+  start_date DateTime @default(now())
+  end_date DateTime
+  details Json
+}
+
+enum MeetingTypeEnum {
+  BIBLE_STUDY
+  PRAYER_MEETING
+  SUNDAY_SERVICE
+  THANKSGIVING_SERVICE
+  PARTNERSHIP_SERVICE
+  BIBLE_STUDY_CLASS
+}
+
+model MeetingType {
+  id Int @default(autoincrement()) @id
+  type MeetingTypeEnum @default(BIBLE_STUDY_CLASS)
+}
+
+model Church {
+  id Int @default(autoincrement()) @id
+  name String
+  country String
+  city String
+}
