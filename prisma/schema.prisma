@@ -10,6 +10,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum UserTypeEnum {
+  GROUP_PASTOR
+  PASTOR
+  CELL_LEADER
+}
+
+model UserType {
+  id Int @default(autoincrement()) @id
+  usertype UserTypeEnum @default(CELL_LEADER)
+
+  users User[]
+}
+
 model User{
   id Int @default(autoincrement()) @id
   firstname String
@@ -23,18 +36,17 @@ model User{
   updated_on DateTime @updatedAt
   deleted_on DateTime?
 
+  type UserType @relation(fields: [typeId], references: [id])
+  typeId Int
 
-}
+  church Church @relation(fields: [churchId], references: [id])
+  churchId Int
 
-enum UserTypeEnum {
-  GROUP_PASTOR
-  PASTOR
-  CELL_LEADER
-}
+  
 
-model UserType {
-  id Int @default(autoincrement()) @id
-  usertype UserTypeEnum @default(CELL_LEADER)
+  reports Report[]
+  report_history ReportHistory[]
+
 }
 
 model Report {
@@ -49,6 +61,19 @@ model Report {
   updated_on DateTime @updatedAt
   deleted_on DateTime?
 
+  user User @relation(fields: [userId], references: [id])
+  userId Int
+
+  church Church @relation(fields: [churchId], references: [id])
+  churchId Int
+
+  meetingType MeetingType @relation(fields: [meetingTypeId], references: [id])
+  meetingTypeId Int
+
+  reportType ReportType @relation(fields: [reportTypeId], references: [id])
+  reportTypeId Int
+
+  reportDetails ReportDetails[]
 }
 
 model ReportDetails{
@@ -65,6 +90,10 @@ model ReportDetails{
   created_on DateTime @default(now())
   updated_on DateTime @updatedAt
   deleted_on DateTime?
+
+  report Report @relation(fields: [reportId], references: [id])
+  reportId Int
+
 }
 
 enum ReportTypeEnum {
@@ -75,6 +104,8 @@ enum ReportTypeEnum {
 model ReportType{
   id Int @default(autoincrement()) @id
   description ReportTypeEnum @default(CELL_REPORT)
+
+  reports Report[]
 }
 
 model ReportHistory {
@@ -82,6 +113,9 @@ model ReportHistory {
   start_date DateTime @default(now())
   end_date DateTime
   details Json
+
+  user User @relation(fields: [userId], references: [id])
+  userId Int
 }
 
 enum MeetingTypeEnum {
@@ -96,6 +130,8 @@ enum MeetingTypeEnum {
 model MeetingType {
   id Int @default(autoincrement()) @id
   type MeetingTypeEnum @default(BIBLE_STUDY_CLASS)
+
+  reports Report[]
 }
 
 model Church {
@@ -103,4 +139,7 @@ model Church {
   name String
   country String
   city String
+
+  users User[]
+  reports Report[]
 }
