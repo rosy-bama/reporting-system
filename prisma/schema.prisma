@@ -28,7 +28,8 @@ model User{
   firstname String
   lastname String
   email String
-  phone Int
+  phone String
+  hash String
   dob DateTime
   address String
 
