@@ -18,7 +18,7 @@ enum UserTypeEnum {
 
 model UserType {
   id Int @default(autoincrement()) @id
-  usertype UserTypeEnum @default(CELL_LEADER)
+  usertype UserTypeEnum @unique
 
   users User[]
 }
@@ -104,7 +104,7 @@ enum ReportTypeEnum {
 
 model ReportType{
   id Int @default(autoincrement()) @id
-  description ReportTypeEnum @default(CELL_REPORT)
+  description ReportTypeEnum @unique
 
   reports Report[]
 }
@@ -130,15 +130,35 @@ enum MeetingTypeEnum {
 
 model MeetingType {
   id Int @default(autoincrement()) @id
-  type MeetingTypeEnum @default(BIBLE_STUDY_CLASS)
+  type MeetingTypeEnum @unique
 
   reports Report[]
 }
 
+enum ChurchEnum {
+    BLW_UNIVERSITY_OF_BUEA
+    BLW_NDONGO
+    BLW_BAMBILI
+    BLW_UNIVERSITY_OF_DOUALA
+    BLW_BONABERI
+    BLW_FOUMBAN
+    BLW_TIKU
+    BLW_AGRICSCHOOL
+    BLW_POLYTECH
+}
+
+enum Country{
+  CAMEROON
+  NIGERIA
+  GHANA
+  USA
+  UK
+}
+
 model Church {
   id Int @default(autoincrement()) @id
-  name String
-  country String
+  name ChurchEnum @unique
+  country Country @default(CAMEROON)
   city String
 
   users User[]
