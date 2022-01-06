@@ -61,4 +61,48 @@ export class InitHelper {
             skipDuplicates: true
         })
     }
+
+    // Usertype helper functions
+    async findOneUserType(where: Prisma.UserTypeWhereUniqueInput){
+        return await this.prisma.userType.findUnique({ where })
+    }
+    async findAllUserType(){
+        return await this.prisma.userType.findMany()
+    }
+    async deleteOneUserType(where: Prisma.UserTypeWhereUniqueInput){
+        return await this.prisma.userType.delete({ where })
+    }
+    
+    // ReportType helper functions
+    async findOneReportType(where: Prisma.ReportTypeWhereUniqueInput){
+        return await this.prisma.reportType.findUnique({ where })
+    }
+    async findAllReportType(){
+        return await this.prisma.reportType.findMany()
+    }
+    async deleteOneReportType(where: Prisma.ReportTypeWhereUniqueInput){
+        return await this.prisma.reportType.delete({ where })
+    }
+    
+    // MeetingType helper functions
+    async findOneMeetingType(where: Prisma.MeetingTypeWhereUniqueInput){
+        return await this.prisma.meetingType.findUnique({ where })
+    }
+    async findAllMeetingType(){
+        return await this.prisma.meetingType.findMany()
+    }
+    async deleteOneMeetingType(where: Prisma.MeetingTypeWhereUniqueInput){
+        return await this.prisma.meetingType.delete({ where })
+    }
+    
+    // Church helper functions
+    async findOneChurch(where: Prisma.ChurchWhereUniqueInput){
+        return await this.prisma.church.findUnique({ where })
+    }
+    async findAllChurch(){
+        return await this.prisma.meetingType.findMany()
+    }
+    async deleteOneChurch(where: Prisma.ChurchWhereUniqueInput){
+        return await this.prisma.church.delete({ where })
+    }
 }

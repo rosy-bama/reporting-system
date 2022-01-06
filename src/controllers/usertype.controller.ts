@@ -9,7 +9,7 @@ export class UserTypeController{
 
     @Get('/:id')
     async findOne(@Param('id', ParseIntPipe) id: number){        
-        return await this.usertypeService.findOne({id: +id});
+        return await this.usertypeService.findOne(id);
     }
 
     @Get()
