@@ -12,8 +12,8 @@ export class UsersService {
     return await this.helper.createNewUserAccount(data);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  async findAll() {
+    return await this.helper.findAllUsers();
   }
 
   findOne(id: number) {

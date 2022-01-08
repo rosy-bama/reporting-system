@@ -100,7 +100,7 @@ export class InitHelper {
         return await this.prisma.church.findUnique({ where })
     }
     async findAllChurch(){
-        return await this.prisma.meetingType.findMany()
+        return await this.prisma.church.findMany()
     }
     async deleteOneChurch(where: Prisma.ChurchWhereUniqueInput){
         return await this.prisma.church.delete({ where })

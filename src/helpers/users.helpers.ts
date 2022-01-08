@@ -9,10 +9,16 @@ export class UsersHelpers {
         private readonly prisma: PrismaService
     ){}
 
-    async createNewUserAccount(user: Prisma.UserCreateInput) : Promise<any>{
+    async createNewUserAccount(user: Prisma.UserUncheckedCreateInput) : Promise<any>{
+        user.dob = new Date(user.dob);
+
         return await this.prisma.user.create({
-            data: user
+            data: user,
         });
+    }
+    
+    async findAllUsers(){
+        return await this.prisma.user.findMany()
     }
 
     async updateUser(where: Prisma.UserWhereUniqueInput, data: Prisma.UserUpdateInput): Promise<any>{

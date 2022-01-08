@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { IsAlpha, IsAlphanumeric, IsDate, IsEmail, IsHash, IsInt, IsNumber, IsNumberString, IsPhoneNumber, IsString, IS_HASH } from "class-validator"
 
 
@@ -12,7 +13,7 @@ export class CreateUserDto{
     email: string
 
     @IsNumberString()
-    phone: number
+    phone: string
 
     @IsString()
     hash: string
@@ -24,8 +25,8 @@ export class CreateUserDto{
     address: string
 
     @IsInt()
-    typeId: number
+    type: Prisma.UserTypeCreateNestedOneWithoutUsersInput
 
     @IsInt()
-    churchId: number
+    church: Prisma.ChurchCreateNestedOneWithoutUsersInput
 }

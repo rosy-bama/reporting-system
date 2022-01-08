@@ -1,6 +1,5 @@
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { InitHelper } from 'src/helpers/init.helper';
-import { UserTypeService } from './usertype.service';
 
 @Injectable()
 export class AppService implements OnModuleInit {
