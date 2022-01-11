@@ -1,0 +1,10 @@
+import env from "process";
+
+export default () => ({
+    port: parseInt(process.env.HTTP_PORT, 10) || 3000,
+    database: {
+        host: process.env.DATABASE_HOST,
+        port: parseInt(process.env.DATABASE_PORT, 10) || 3306
+    }
+});
+

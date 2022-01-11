@@ -10,8 +10,6 @@ export class UsersHelpers {
     ){}
 
     async createNewUserAccount(user: Prisma.UserUncheckedCreateInput) : Promise<any>{
-        user.dob = new Date(user.dob);
-
         return await this.prisma.user.create({
             data: user,
         });

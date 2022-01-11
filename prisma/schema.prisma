@@ -29,7 +29,7 @@ model User{
   lastname String
   email String
   phone String
-  hash String
+  password String
   dob DateTime
   address String
 
